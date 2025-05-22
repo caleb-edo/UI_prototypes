@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.css' rel='stylesheet'/>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.js'></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialDate: '2024-05-13',
+                editable: true,
+                selectable: true,
+                businessHours: true,
+                dayMaxEvents: true,
+                events: [
+                    {
+                        title: 'Career Fairs',
+                        start: '2022-03-03',
+                        url: 'http://www.le.ac.uk'
+                    },
+                    {
+                        title: 'Happy days',
+                        start: '2022-03-07',
+                        end: '2022-03-10'
+                    },
+                    {
+                        title: 'Meeting',
+                        start: '2022-03-12T10:30:00',
+                        end: '2022-03-12T12:30:00'
+                    },
+                    {
+                        title: 'Lunch',
+                        start: '2022-03-12T12:00:00'
+                    }
+                ], eventClick: function(info) {
+                    info.jsEvent.preventDefault();
+                    if (info.event.url) {
+                        alert(info.event.url);
+                    }
+                }
+            });
+            calendar.render();
+        });
+    </script>
+    <script>
+        function enlargeText() {
+            var elements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, label, a, button, input, select, option');
+            elements.forEach(function(element) {
+                var fontSize = window.getComputedStyle(element).fontSize;
+                var newSize = parseFloat(fontSize) * 1.2;
+                element.style.fontSize = newSize + 'px';
+            });
+        }
+
+        function speakText() {
+            var elements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, label, a, button, input, select, option');
+            var text = '';
+            elements.forEach(function(element) {
+                text += element.textContent + '. ';
+            });
+            var speech = new SpeechSynthesisUtterance(text);
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
+    <style>
+        .accessibility-box {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .container {
+            text-align: center;
+        }
+
+        .container img.logo {
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 60px;
+            max-width: 100%;
+        }
+    </style>
+
+</head>
+<body>
+<div class="toolbar">
+    <img src="/images/logo.png" alt="Logo">
+    <div class="toolbar-links">
+        <a href="home.html">Home</a>
+        <a href="home.html">Help</a>
+        <a href="home.html">Topics</a>
+        <a href="home.html">Attractions</a>
+        <a href="home.html">Contact us</a>
+    </div>
+    <div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <button>Search</button>
+    </div>
+    <div class="user-actions">
+        <button onclick="window.location.href='index.html'">Login</button>
+        <button onclick="window.location.href='index.html'">Register</button>
+    </div>
+</div>
+<div class="container">
+    <img src="/images/logo.png" width="200px" height="250px" class="logo" alt="Logo">
+    <h1>Welcome to London Car Enthusiasts!</h1>
+    <form id="loginForm" action="home.html">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+</div>
+<div class="accessibility-box">
+    <button onclick="enlargeText()">Enlarge Text</button>
+    <button onclick="speakText()">Read Aloud</button>
+</div>
+
+</body>
+</html>

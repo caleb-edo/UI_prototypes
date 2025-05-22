@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Car</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.css' rel='stylesheet'/>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.js'></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialDate: '2024-05-13',
+                editable: true,
+                selectable: true,
+                businessHours: true,
+                dayMaxEvents: true,
+                events: [
+                    {
+                        title: 'Career Fairs',
+                        start: '2022-03-03',
+                        url: 'http://www.le.ac.uk'
+                    },
+                    {
+                        title: 'Happy days',
+                        start: '2022-03-07',
+                        end: '2022-03-10'
+                    },
+                    {
+                        title: 'Meeting',
+                        start: '2022-03-12T10:30:00',
+                        end: '2022-03-12T12:30:00'
+                    },
+                    {
+                        title: 'Lunch',
+                        start: '2022-03-12T12:00:00'
+                    }
+                ], eventClick: function(info) {
+                    info.jsEvent.preventDefault();
+                    if (info.event.url) {
+                        alert(info.event.url);
+                    }
+                }
+            });
+            calendar.render();
+        });
+    </script>
+    <script>
+        function enlargeText() {
+            var elements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, label, a, button, input, select, option');
+            elements.forEach(function(element) {
+                var fontSize = window.getComputedStyle(element).fontSize;
+                var newSize = parseFloat(fontSize) * 1.2;
+                element.style.fontSize = newSize + 'px';
+            });
+        }
+
+        function speakText() {
+            var elements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, label, a, button, input, select, option');
+            var text = '';
+            elements.forEach(function(element) {
+                text += element.textContent + '. ';
+            });
+            var speech = new SpeechSynthesisUtterance(text);
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var map = L.map('map').setView([51.505, -0.09], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            var marker = L.marker([51.5, -0.09]).addTo(map);
+            marker.bindPopup("<b>Hello!</b><br>This is London.").openPopup();
+        });
+    </script>
+    <style>
+        .accessibility-box {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .map-container {
+            height: 300px;
+        }
+
+        button.back-button {
+            padding: 5px 10px;
+            font-size: 14px;
+            width: auto;
+        }
+
+    </style>
+</head>
+<body>
+<div class="toolbar">
+    <img src="/images/logo.png" alt="Logo">
+    <div class="toolbar-links">
+        <a href="home.html">Home</a>
+        <a href="home.html">Help</a>
+        <a href="home.html">Topics</a>
+        <a href="home.html">Attractions</a>
+        <a href="home.html">Contact us</a>
+    </div>
+    <div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <button>Search</button>
+    </div>
+    <div class="user-actions">
+        <button onclick="window.location.href='index.html'">Login</button>
+        <button onclick="window.location.href='index.html'">Register</button>
+    </div>
+</div>
+<div class="container">
+    <div class="sidebar">
+        <div class="dialog-box">
+            <h3>Map of London</h3>
+            <div class="map-container" id="map"></div>
+        </div>
+        <div class="dialog-box">
+            <h3>Calendar</h3>
+            <div id='calendar'></div>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Your top picks!</h1>
+        <h4>Choose your car!</h4>
+        <div class="car-list">
+            <a href="booking.html" class="car-link">
+                <div class="car">
+                    <img src="/images/car1.jpg" alt="Car 1">
+                    <div class="car-details">
+                        <h2>Porsche 911</h2>
+                        <p>A legendary sports car known for its performance and iconic design.</p>
+                    </div>
+                </div>
+            </a>
+            <a href="booking.html" class="car-link">
+                <div class="car">
+                    <img src="/images/car2.jpg" alt="Car 2">
+                    <div class="car-details">
+                        <h2>Audi R8</h2>
+                        <p>A high-performance sports car with a sleek and futuristic design.</p>
+                    </div>
+                </div>
+            </a>
+            <a href="booking.html" class="car-link">
+                <div class="car">
+                    <img src="/images/car3.jpg" alt="Car 3">
+                    <div class="car-details">
+                        <h2>Ferrari 488 GTB</h2>
+                        <p>An Italian masterpiece with stunning aesthetics and exceptional speed.</p>
+                    </div>
+                </div>
+            </a>
+            <a href="booking.html" class="car-link">
+                <div class="car">
+                    <img src="/images/car4.jpg" alt="Car 4">
+                    <div class="car-details">
+                        <h2>Lamborghini Huracan</h2>
+                        <p>A bold and aggressive supercar with jaw-dropping performance.</p>
+                    </div>
+                </div>
+            </a>
+            <a href="booking.html" class="car-link">
+                <div class="car">
+                    <img src="/images/car5.jpg" alt="Car 5">
+                    <div class="car-details">
+                        <h2>McLaren 720S</h2>
+                        <p>A cutting-edge supercar that combines speed, luxury, and innovation.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="accessibility-box">
+    <button onclick="enlargeText()">Enlarge Text</button>
+    <button onclick="speakText()">Read Aloud</button>
+</div>
+<button class="back-button" onclick="window.location.href='home.html'">Back</button>
+</body>
+</html>

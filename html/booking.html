@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Test Drive</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.css' rel='stylesheet'/>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.2/main.js'></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialDate: '2024-05-13',
+                editable: true,
+                selectable: true,
+                businessHours: true,
+                dayMaxEvents: true,
+                events: [
+                    {
+                        title: 'Career Fairs',
+                        start: '2022-03-03',
+                        url: 'http://www.le.ac.uk'
+                    },
+                    {
+                        title: 'Happy days',
+                        start: '2022-03-07',
+                        end: '2022-03-10'
+                    },
+                    {
+                        title: 'Meeting',
+                        start: '2022-03-12T10:30:00',
+                        end: '2022-03-12T12:30:00'
+                    },
+                    {
+                        title: 'Lunch',
+                        start: '2022-03-12T12:00:00'
+                    }
+                ], eventClick: function(info) {
+                    info.jsEvent.preventDefault();
+                    if (info.event.url) {
+                        alert(info.event.url);
+                    }
+                }
+            });
+            calendar.render();
+        });
+    </script>
+    <script>
+        function enlargeText() {
+            var elements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, label, a, button, input, select, option');
+            elements.forEach(function(element) {
+                var fontSize = window.getComputedStyle(element).fontSize;
+                var newSize = parseFloat(fontSize) * 1.2;
+                element.style.fontSize = newSize + 'px';
+            });
+        }
+
+        function speakText() {
+            var elements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, label, a, button, input, select, option');
+            var text = '';
+            elements.forEach(function(element) {
+                text += element.textContent + '. ';
+            });
+            var speech = new SpeechSynthesisUtterance(text);
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var map = L.map('map').setView([51.505, -0.09], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            var marker = L.marker([51.5, -0.09]).addTo(map);
+            marker.bindPopup("<b>Hello!</b><br>This is London.").openPopup();
+        });
+    </script>
+    <style>
+        .accessibility-box {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .map-container {
+            height: 300px;
+        }
+
+        button.back-button {
+            padding: 5px 10px;
+            font-size: 14px;
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="toolbar">
+    <img src="/images/logo.png" alt="Logo">
+    <div class="toolbar-links">
+        <a href="home.html">Home</a>
+        <a href="home.html">Help</a>
+        <a href="home.html">Topics</a>
+        <a href="home.html">Attractions</a>
+        <a href="home.html">Contact us</a>
+    </div>
+    <div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <button>Search</button>
+    </div>
+    <div class="user-actions">
+        <button onclick="window.location.href='index.html'">Login</button>
+        <button onclick="window.location.href='index.html'">Register</button>
+    </div>
+</div>
+<div class="container">
+    <div class="sidebar">
+        <div class="dialog-box">
+            <h3>Map of London</h3>
+            <div class="map-container" id="map"></div>
+        </div>
+        <div class="dialog-box">
+            <h3>Calendar</h3>
+            <div id='calendar'></div>
+        </div>
+    </div>
+    <div class="booking-form">
+        <h1>Book your test drive!</h1>
+        <form action="success.html">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Your name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Your email" required>
+
+            <label for="license">Driver's License Number:</label>
+            <input type="text" id="license" placeholder="Driver's license number" required>
+
+            <h3>Please select your desired date on the calendar</h3>
+
+            <label for="time">Available times:</label>
+            <select id="time">
+                <option value="9:00 AM">9:00 AM</option>
+                <option value="10:00 AM">10:00 AM</option>
+                <option value="11:00 AM">11:00 AM</option>
+            </select>
+
+            <div class="checkbox">
+                <input type="checkbox" id="agree" required>
+                <label for="agree">I agree to the terms and conditions</label>
+            </div>
+
+            <button type="submit">Book!</button>
+        </form>
+    </div>
+</div>
+<div class="accessibility-box">
+    <button onclick="enlargeText()">Enlarge Text</button>
+    <button onclick="speakText()">Read Aloud</button>
+</div>
+<button class="back-button" onclick="window.location.href='cars.html'">Back</button>
+</body>
+</html>
